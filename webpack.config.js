@@ -13,7 +13,7 @@ module.exports = {
     filename: 'main.bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  target: ['web', 'es5'],
+  // target: ['web', 'es5'],
   mode: 'development', // 번들링 mode 설정
   module: {
     // 모듈 설정
