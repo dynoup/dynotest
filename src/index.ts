@@ -1,11 +1,7 @@
 import './style.css';
+import Home from './pages/Home';
+import createRoot from './core/Owo';
 
-function component() {
-  const element = document.createElement('div');
+const root = createRoot();
 
-  element.innerHTML = 'hello';
-
-  return element;
-}
-
-document.body.appendChild(component());
+Home('__Home', root);
