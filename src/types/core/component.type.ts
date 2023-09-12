@@ -1,5 +1,5 @@
 export interface ComponentProps {
-  name?: string;
+  name: string;
   container?: Element;
   [key: string]: any;
 }
