@@ -1,3 +1,4 @@
+import { Header } from './components';
 import Component from './core/component';
 import { ComponentProps } from './types/core/component.type';
 
@@ -8,9 +9,7 @@ export default class App extends Component {
 
   template() {
     return `
-      <div>
-        <h1>App</h1>
-      </div>
+      ${new Header({ name: 'Header' }).render()}
     `;
   }
 }
