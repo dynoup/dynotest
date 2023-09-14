@@ -1,15 +1,17 @@
-import { Header } from './components';
-import Component from './core/component';
-import { ComponentProps } from './types/core/component.type';
+import useCoreComponent from './core/useCoreComponent';
+import { ComponentProps } from './types/component';
 
-export default class App extends Component {
-  constructor(props?: ComponentProps) {
-    super(props);
-  }
+export default function App(props?: ComponentProps) {
+  const coreComponentProps = useCoreComponent('App');
 
-  template() {
-    return `
-      ${new Header({ name: 'Header' }).render()}
-    `;
-  }
+  return {
+    ...coreComponentProps,
+    render() {
+      return `
+        <div>
+          <h1>Core2 App</h1>
+        </div>
+      `;
+    },
+  };
 }
