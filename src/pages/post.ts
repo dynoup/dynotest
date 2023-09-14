@@ -1,12 +1,28 @@
-import { Component } from '../core';
-import { ComponentProps } from '../types/core';
+import PostDetail from '../components/Post/PostDetail';
+import render from '../core/render';
+import useCoreComponent from '../core/useCoreComponent';
+import { ComponentProps } from '../types/component';
 
-export default class Post extends Component {
-  constructor(props: ComponentProps) {
-    super(props);
-  }
+export default function PostPage(props?: ComponentProps) {
+  const coreComponentProps = useCoreComponent('PostPage');
 
-  template(): string {
-    return ``;
-  }
+  return {
+    ...coreComponentProps,
+    render() {
+      return `
+        <section class="post section">
+          <header class="section-header">
+            <button type="button" aria-label="Go to previos page">
+              <i class="bx bx-arrow-back"></i>
+            </button>
+            <h2 class="section-title">Post</h2>
+          </header>
+        
+          <div class="section-content">
+            ${render(PostDetail)}
+          </div>
+        </section>
+      `;
+    },
+  };
 }
