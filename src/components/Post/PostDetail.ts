@@ -3,13 +3,13 @@ import useCoreComponent from '../../core/useCoreComponent';
 import { ComponentProps } from '../../types/core/component';
 import { getBookmarks, setBookmark } from '../Bookmarks.ts/setBookmark';
 
+function handleAddBookmark() {
+  setBookmark(`postId`);
+  console.log('[getBookmarks]', getBookmarks());
+}
+
 export default function PostDetail(props?: ComponentProps) {
   const coreComponentProps = useCoreComponent('PostDetail');
-
-  function handleAddBookmark() {
-    setBookmark(`postId`);
-    console.log('[getBookmarks]', getBookmarks());
-  }
 
   setEvents([
     {
