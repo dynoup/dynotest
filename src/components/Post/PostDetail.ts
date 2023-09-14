@@ -1,8 +1,23 @@
+import { setEvents } from '../../core/event';
 import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/component';
+import { ComponentProps } from '../../types/core/component';
+import { getBookmarks, setBookmark } from '../Bookmarks.ts/setBookmark';
 
 export default function PostDetail(props?: ComponentProps) {
   const coreComponentProps = useCoreComponent('PostDetail');
+
+  function handleAddBookmark() {
+    setBookmark(`postId`);
+    console.log('[getBookmarks]', getBookmarks());
+  }
+
+  setEvents([
+    {
+      selector: '.add-bookmark-button',
+      action: 'click',
+      handler: handleAddBookmark,
+    },
+  ]);
 
   return {
     ...coreComponentProps,
@@ -63,7 +78,7 @@ export default function PostDetail(props?: ComponentProps) {
               </div>
             </dl>
     
-            <button type="button" aria-label="Add post to Bookmarks">
+            <button type="button" class="add-bookmark-button" aria-label="Add post to Bookmarks">
               <i class="bx bx-bookmark"></i>
             </button>
           </footer>
