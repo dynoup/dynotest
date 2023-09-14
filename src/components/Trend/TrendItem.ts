@@ -1,6 +1,6 @@
 import render from '../../core/render';
 import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/component';
+import { ComponentProps } from '../../types/core/component';
 
 export default function TrendItem(props?: ComponentProps) {
   const coreComponentProps = useCoreComponent('TrendItem');

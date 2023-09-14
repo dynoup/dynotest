@@ -1,6 +1,6 @@
 import render from '../../core/render';
 import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/component';
+import { ComponentProps } from '../../types/core/component';
 import Nav from './Nav';
 
 export default function Header(props?: ComponentProps) {

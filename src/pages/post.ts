@@ -1,7 +1,7 @@
 import PostDetail from '../components/Post/PostDetail';
 import render from '../core/render';
 import useCoreComponent from '../core/useCoreComponent';
-import { ComponentProps } from '../types/component';
+import { ComponentProps } from '../types/core/component';
 
 export default function PostPage(props?: ComponentProps) {
   const coreComponentProps = useCoreComponent('PostPage');

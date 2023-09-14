@@ -1,4 +1,4 @@
-import { CurrentDoms } from '../types/component';
+import { CurrentDoms } from '../types/core/component';
 
 const currentDom: CurrentDoms = {};
 

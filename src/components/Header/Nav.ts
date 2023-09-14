@@ -1,5 +1,5 @@
 import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/component';
+import { ComponentProps } from '../../types/core/component';
 
 export default function Nav(props?: ComponentProps) {
   const coreComponentProps = useCoreComponent('Nav');
