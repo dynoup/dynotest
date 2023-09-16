@@ -4,14 +4,9 @@ export default function updateNode(
   newElement: Element | null,
   oldElement: Element | null
 ) {
-  console.log('[parentElement]', parentElement);
-  console.log('[newElement]', newElement);
-  console.log('[oldElement]', oldElement);
-
   // 1. oldElement는 있고 newElement는 없는 경우: oldElement를 제거한다.
   if (newElement === null) {
     if (oldElement) {
-      console.log('[-----newElement 없음-----]');
       oldElement.remove();
     }
     return;
@@ -20,7 +15,6 @@ export default function updateNode(
   // 2. oldElement는 없고 newElement는 있는 경우: parentElement에 newElement를 추가한다.
   if (oldElement === null) {
     if (newElement) {
-      console.log('[-----oldElement 없음-----]');
       parentElement.append(newElement);
     }
     return;
@@ -30,17 +24,14 @@ export default function updateNode(
   // 1-1. oldElement와 newElement가 모두 text node일 경우: text값을 비교하고 다르면 newElement로 교체하고 return 한다.
   if (oldElement.nodeName === '#text' && newElement.nodeName === '#text') {
     if (oldElement.textContent !== newElement.textContent) {
-      console.log('[-----text인데 다름-----]');
       oldElement.textContent = newElement.textContent;
     }
 
-    console.log('[-----text인데 같음-----]');
     return;
   }
 
   // 1-2. oldElement와 newElement의 tag(nodeName)이 다른 경우: oldElement를 newElement로 교체하고 return 한다.
   if (oldElement.nodeName !== newElement.nodeName) {
-    console.log('[-----tag 다름-----]');
     oldElement.replaceWith(newElement);
     return;
   }
@@ -68,7 +59,6 @@ export default function updateNode(
 
 // TODO: property(ex: checked)도 업데이트도 해주기. (필요한지 체크 해보고)
 function updateAttributes(oldElement: Element, newElement: Element) {
-  console.log('[-----attribute 체크-----]');
   const oldElementAttributes = [...oldElement.attributes]; // {key: value}[]
   const newElementAttributes = [...newElement.attributes];
 
