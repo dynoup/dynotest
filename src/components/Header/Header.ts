@@ -1,23 +1,21 @@
 import render from '../../core/render';
 import useCoreComponent from '../../core/useCoreComponent';
 import { ComponentProps } from '../../types/core/component';
-import Nav from './Nav';
+// import Nav from './Nav';
 
 export default function Header(props?: ComponentProps) {
-  const coreComponentProps = useCoreComponent('Header');
+  const componentObject = useCoreComponent({ component: Header });
 
-  return {
-    ...coreComponentProps,
-    render() {
-      return `
+  componentObject.render = () => {
+    return `
         <header class="global-header">
           <h1 class="logo">
             <a href="/">Dynotest</a>
           </h1>
 
-          ${render(Nav)}
         </header>
       `;
-    },
   };
+
+  return () => componentObject;
 }

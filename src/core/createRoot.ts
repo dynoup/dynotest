@@ -18,7 +18,7 @@ export default function createRoot($root: Element) {
       });
     },
     render(component: Component) {
-      $root.innerHTML = render(component);
+      $root.innerHTML = render(component());
       this.setEvents();
     },
   };

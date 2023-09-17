@@ -1,23 +1,28 @@
-import { EventObject } from './event';
+import { ContextPool } from '../store/context';
 
 export interface CurrentDoms {
-  [key: string]: string;
+  [key: string]: Element;
 }
-
-export interface UseCurrentDom {
-  getCurrentDom: () => string;
-  setCurrentDom: (newCurrentDom: string) => string;
-}
-
 export interface ComponentProps {
   [key: string]: any;
 }
 
-export type Component = {
-  (props?: ComponentProps): {
-    render: () => string;
-    getCurrentDom: UseCurrentDom['getCurrentDom'];
-    setCurrentDom: UseCurrentDom['setCurrentDom'];
-    setEvent?: (args?: EventObject) => void;
-  };
-};
+export interface ComponentObject {
+  type: 'component';
+  key: string;
+  component: Component | null;
+  parentComponent: Component | null;
+  contexts: ContextPool;
+  // chilren: Component[],
+  // getCurrentDom(): Element;
+  // setCurrentDom(newCurrentDom: Element | DocumentFragment): Element;
+  render(): string;
+}
+
+export interface ComponentInstance {
+  (): ComponentObject;
+}
+
+export interface Component {
+  (props?: ComponentProps): ComponentInstance;
+}

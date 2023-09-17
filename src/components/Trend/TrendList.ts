@@ -4,16 +4,15 @@ import { ComponentProps } from '../../types/core/component';
 import TrendItem from './TrendItem';
 
 export default function TrendList(props?: ComponentProps) {
-  const coreComponentProps = useCoreComponent('TrendList');
+  const componentObject = useCoreComponent({ component: TrendList });
 
-  return {
-    ...coreComponentProps,
-    render() {
-      return `
-        <ul class="trend-list">
-          ${render(TrendItem)}
-        </ul>
-      `;
-    },
+  componentObject.render = () => {
+    return `
+      <ul class="trend-list">
+        ${render(TrendItem)}
+      </ul>
+    `;
   };
+
+  return () => componentObject;
 }
