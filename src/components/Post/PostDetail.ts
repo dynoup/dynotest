@@ -1,34 +1,34 @@
-import { setEvents } from '../../core/event';
-import render from '../../core/render';
-import useCoreComponent from '../../core/useCoreComponent';
-import useState from '../../core/useState';
-import { ComponentProps } from '../../types/core/component';
-import { getBookmarks } from '../Bookmarks.ts/setBookmark';
+import { ComponentProps } from '../../packages/core/component.type';
+import useCoreComponent from '../../packages/core/useCoreComponent';
+import { setEvents } from '../../packages/event/event';
+import useState from '../../packages/state/useState';
+import getLocalStorageBookmarks from '../../utils/Bookmarks/getBookmarks';
 
 export default function PostDetail(props?: ComponentProps) {
-  const componentObject = useCoreComponent({ component: PostDetail });
+  const componentObject = useCoreComponent({
+    component: PostDetail,
+    parent: props?.parent,
+  });
+  const [getBookmarks, setBookmark] = useState(
+    componentObject,
+    'bookmarks',
+    getLocalStorageBookmarks()
+  );
+
+  function handleAddBookmark() {
+    setBookmark((bookmarks: string[]) => [...bookmarks, 'newPostId']);
+  }
+
+  setEvents([
+    {
+      componentKey: componentObject.key,
+      selector: '.add-bookmark-button',
+      action: 'click',
+      handler: handleAddBookmark,
+    },
+  ]);
 
   componentObject.render = () => {
-    const [bookmarks, setBookmark] = useState(
-      () => componentObject,
-      getBookmarks()
-    );
-
-    console.log('[bookmarks]', bookmarks);
-
-    function handleAddBookmark() {
-      console.log('[handleAddBookmark]');
-      setBookmark((bookmarks: string[]) => [...bookmarks, 'newPostId']);
-    }
-
-    setEvents([
-      {
-        selector: '.add-bookmark-button',
-        action: 'click',
-        handler: handleAddBookmark,
-      },
-    ]);
-
     return `
       <article class="post-detail">
         <header class="post-header">
@@ -85,7 +85,7 @@ export default function PostDetail(props?: ComponentProps) {
             </div>
             <div>
               <dt>Number of Bookmarks</dt>
-              <dd>${bookmarks}</dd>
+              <dd>${getBookmarks()}</dd>
             </div>
           </dl>
 
