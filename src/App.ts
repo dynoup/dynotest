@@ -1,43 +1,53 @@
 import Header from './components/Header/Header';
 import Trend from './components/Trend/Trend';
-import render from './core/render';
-import useCoreComponent from './core/useCoreComponent';
+import { ComponentProps } from './packages/core/component.type';
+import render from './packages/core/render';
+import useCoreComponent from './packages/core/useCoreComponent';
+import { BrowserRouter, createBrowserRouter } from './packages/router';
+import HomePage from './pages/home';
 import PostPage from './pages/post';
-import { ComponentProps } from './types/core/component';
 
 export default function App(props?: ComponentProps) {
-  const componentObject = useCoreComponent({ component: App });
+  const componentObject = useCoreComponent({
+    component: App,
+  });
 
-  const HeaderInstance = Header();
-  const PostPageInstance1 = PostPage();
-  const PostPageInstance2 = PostPage();
-  const TrendInstance = Trend();
+  // TODO: BrowserRouter 하위 컴포넌트를 parent로 넘겨주는게 짜증남... 다른 방법 찾아보기...
+  const BrowserRouterInstance = BrowserRouter({
+    parent: componentObject,
+  });
+  const BrowserRouterObject = BrowserRouterInstance();
 
-  // const router = createBrowserRouter([
-  //   {
-  //     path: '/',
-  //     component: HomePage,
-  //   },
-  //   {
-  //     path: '/post',
-  //     component: PostPage,
-  //   },
-  //   // {
-  //   //   path: '/bookmarks',
-  //   //   component: BookmarksPage,
-  //   // },
-  //   // {
-  //   //   path: '/profile',
-  //   //   component: ProfilePage,
-  //   // },
-  // ]);
+  const HeaderInstance = Header({ parent: BrowserRouterObject });
+  const HomePageInstance = HomePage({ parent: BrowserRouterObject });
+  const PostPageInstance1 = PostPage({
+    parent: BrowserRouterObject,
+  });
+  const TrendInstance = Trend({ parent: BrowserRouterObject });
+
+  createBrowserRouter([
+    {
+      path: '/',
+      component: HomePageInstance,
+    },
+    {
+      path: '/index.html',
+      component: HomePageInstance,
+    },
+    {
+      path: '/post',
+      component: PostPageInstance1,
+    },
+    {
+      path: '/trend',
+      component: TrendInstance,
+    },
+  ]);
 
   componentObject.render = () => {
     return `
       ${render(HeaderInstance)}
-      ${render(PostPageInstance1)}
-      ${render(PostPageInstance2)}
-      ${render(TrendInstance)}
+      ${render(BrowserRouterInstance)}
     `;
   };
 
