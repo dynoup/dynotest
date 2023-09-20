@@ -1,9 +1,14 @@
-import render from '../../core/render';
-import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/core/component';
+import { ComponentProps } from '../../packages/core/component.type';
+import useCoreComponent from '../../packages/core/useCoreComponent';
+import { useContext } from '../../packages/store';
 
 export default function TrendItem(props?: ComponentProps) {
-  const componentObject = useCoreComponent({ component: TrendItem });
+  const componentObject = useCoreComponent({
+    component: TrendItem,
+    parent: props?.parent,
+  });
+
+  const [getCount] = useContext('count', () => componentObject);
 
   componentObject.render = () => {
     return `
@@ -13,12 +18,12 @@ export default function TrendItem(props?: ComponentProps) {
           <h3>광역버스</h3>
           <dl>
             <dt>Number of posts</dt>
-            <dd>13,030 posts</dd>
+            <dd>count: ${getCount()}</dd>
           </dl>
         </a>
       </li>
     `;
   };
 
-  return componentObject;
+  return () => componentObject;
 }
