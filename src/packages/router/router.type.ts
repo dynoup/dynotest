@@ -1,8 +1,8 @@
-import { Component, ComponentProps } from '../core/component';
+import { ComponentInstance, ComponentProps } from '../core/component.type';
 
 export type Router = {
   path: string;
-  component: Component;
+  component: ComponentInstance;
 }[];
 
 export interface BrowserRouterProps extends ComponentProps {
