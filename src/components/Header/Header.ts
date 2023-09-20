@@ -1,10 +1,15 @@
-import render from '../../core/render';
-import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/core/component';
-// import Nav from './Nav';
+import { ComponentProps } from '../../packages/core/component.type';
+import render from '../../packages/core/render';
+import useCoreComponent from '../../packages/core/useCoreComponent';
+import Nav from './Nav';
 
 export default function Header(props?: ComponentProps) {
-  const componentObject = useCoreComponent({ component: Header });
+  const componentObject = useCoreComponent({
+    component: Header,
+    parent: props?.parent,
+  });
+
+  const NavInstance = Nav({ parent: componentObject });
 
   componentObject.render = () => {
     return `
@@ -13,6 +18,7 @@ export default function Header(props?: ComponentProps) {
             <a href="/">Dynotest</a>
           </h1>
 
+          ${render(NavInstance)}
         </header>
       `;
   };

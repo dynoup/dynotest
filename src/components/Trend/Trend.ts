@@ -1,12 +1,16 @@
-import render from '../../core/render';
-import useCoreComponent from '../../core/useCoreComponent';
-import { ComponentProps } from '../../types/core/component';
+import { ComponentProps } from '../../packages/core/component.type';
+import render from '../../packages/core/render';
+import useCoreComponent from '../../packages/core/useCoreComponent';
 import TrendList from './TrendList';
 
 export default function Trend(props?: ComponentProps) {
-  const componentObject = useCoreComponent({ component: Trend });
+  const componentObject = useCoreComponent({
+    component: Trend,
+    parent: props?.parent,
+  });
 
-  const TrendListInstance = TrendList();
+  const TrendListInstance = TrendList({ parent: componentObject });
+
   componentObject.render = () => {
     return `
       <aside class="trend">
