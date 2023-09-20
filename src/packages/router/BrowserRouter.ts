@@ -2,7 +2,7 @@ import { ComponentProps } from '../core/component.type';
 import render from '../core/render';
 import useCoreComponent from '../core/useCoreComponent';
 import { setEvents } from '../event/event';
-import { routerPool } from './router';
+import { routerPool } from './createBrowerRouter';
 
 // TODO: router를 require props로 타입 지정...
 export default function BrowserRouter(props?: ComponentProps) {
@@ -36,6 +36,7 @@ export default function BrowserRouter(props?: ComponentProps) {
 
 function getRouterComponent(path?: string) {
   // if (path === window.location.pathname) return; // TODO: 동일한 페이지로 이동하는 버튼을 클릭할 경우 무시한다.
+  console.log('[routerPool]', routerPool);
 
   const targetRouter = routerPool.find(
     (router) => router.path === (path ?? window.location.pathname)
