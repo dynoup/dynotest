@@ -1,15 +1,21 @@
-import { Component } from '../types/core/component';
-import { events } from './event';
+import { Component } from './component.type';
+import { events } from '../event/event';
 import render from './render';
 
 export default function createRoot($root: Element) {
   return {
     setEvents() {
-      events.forEach(({ selector, action, handler }) => {
+      events.forEach(({ componentKey, selector, action, handler }) => {
         const newHandler =
           selector !== 'window'
             ? (e: Event) => {
-                if ((e.target as HTMLElement).closest(selector)) handler(e);
+                if (
+                  (e.target as HTMLElement).closest(
+                    `[data-component="${componentKey}"]`
+                  ) &&
+                  (e.target as HTMLElement).closest(selector)
+                )
+                  handler(e);
               }
             : handler;
 

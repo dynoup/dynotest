@@ -1,4 +1,4 @@
-import { ComponentInstance } from '../types/core/component';
+import { ComponentInstance } from './component.type';
 import updateNode from './diff';
 
 // FIXME: function component가 여러개 작성됐을 경우 내부 코드를 공유하고 있음... 왜지...? => 클로저 때문인듯. => 이걸로 생기는 문제가 있는지는 만들어보면서 해결하기.
