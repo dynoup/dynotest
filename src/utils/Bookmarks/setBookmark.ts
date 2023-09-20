@@ -1,6 +1,6 @@
-import { getBookmarks } from './getBookmarks';
+import getBookmarks from './getBookmarks';
 
-export function setBookmark(postId: string) {
+export default function setBookmark(postId: string) {
   let bookmarks = getBookmarks();
   bookmarks = bookmarks ? [postId, ...bookmarks] : [postId];
 
