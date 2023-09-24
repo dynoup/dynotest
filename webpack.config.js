@@ -11,7 +11,7 @@ module.exports = {
   output: {
     // 아웃풋 파일 설정
     filename: 'main.bundle.js',
-    path: path.resolve(__dirname, './'),
+    path: path.resolve(__dirname, 'dist'),
   },
   // target: ['web', 'es5'],
   mode: 'development', // 번들링 mode 설정
