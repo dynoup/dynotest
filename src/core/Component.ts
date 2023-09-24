@@ -1,68 +1,91 @@
+const regex = /\{{(.*?)}}/g;
+type styleObject = {
+  [property: string]: string;
+};
+
 function Component($id: string, $parent: HTMLDivElement) {
   const Element = document.createElement('div');
   const state = {};
+
   this.element = Element;
   this.state = state;
-  this.innerHTML = ``;
+  this.stateList = [];
+  this.eventList = {};
+  this.innerHTML = '';
+  this.style = '';
 
-  this.init = function () {
+  this.init = () => {
     this.element.id = $id;
     this.element.innerHTML = '';
     $parent.appendChild(this.element);
     this.element = document.getElementById($id);
   };
-  // 기존 콤포
-  // this.template = function (newInnerHTML: any) {
-  //   this.innerHTML = newInnerHTML;
-  //   this.render();
-  //   this.onUpdated();
-  // };
-  // 기존 렌더
-  // this.render = function () {
-  //   const newElement = document.createElement('div');
-  //   newElement.id = $id;
-  //   newElement.innerHTML = this.innerHTML;
-  //   this.element.replaceWith(newElement);
-  //   this.element = newElement;
-  // };
 
-  // 특정 state가 들어간 값만 찾아서 바꿔야한다.
-
-  this.template = function (newInnerHTML: any) {
-    this.element.innerHTML = newInnerHTML;
+  this.template = (newInnerHTML: any) => {
+    this.innerHTML = newInnerHTML;
+    this.element.innerHTML = `${newInnerHTML}`;
+    // 템플릿 초기화
+    this.stateList = this.innerHTML.match(regex) || [];
+    // state의 목록을 저장해두고 리렌더 할 때 목록을 방문하며 데이터를 넣어준다.
+    this.render();
   };
 
-  this.render = function (states: string[]) {
-    if (states.length > 0) {
-      states.forEach((state) => {
-        console.log('state', state);
-        const stateValues = this.state;
-        const value = stateValues[state];
-        this.element.querySelector(`#${state}`).innerHTML = `${value}`;
-        // const element = document.getElementById(state);
-        // if (element) {
-        //   element.innerHTML = `${value}`;
-        // }
+  this.render = () => {
+    let oldInnerHTML = this.innerHTML;
+    if (this.stateList.length > 0) {
+      this.stateList.forEach((item: string) => {
+        oldInnerHTML = oldInnerHTML.replaceAll(
+          item,
+          this.state[item.slice(2, -2)]
+        );
       });
+      this.element.firstChild.innerHTML = oldInnerHTML;
+      this.onEventBind();
     }
   };
 
-  this.onMounted = function () {
+  this.onMounted = () => {
     // console.log('onMounted');
   };
 
-  this.onUnmounted = function () {
+  this.onUnmounted = () => {
     // console.log('onUnmounted');
   };
 
-  this.onUpdated = function () {
+  this.onUpdated = () => {
     // console.log('onUpdated');
   };
 
-  this.onClick = function (target: string, event: any) {
+  this.onClick = (target: string, event: any) => {
+    this.eventList[target] = { event: event, type: 'onClick' };
     const element = document.getElementById(target);
     if (element) {
       element.onclick = event;
+    }
+  };
+
+  this.onStateBind = (pool: any) => {
+    this.state = pool.state;
+    pool.emitter.on(pool.name, () => {
+      this.render();
+    });
+  };
+
+  this.onEventBind = () => {
+    Object.keys(this.eventList).map((key) => {
+      const targetEvent = this.eventList[key];
+      const element = document.getElementById(key);
+      if (element && targetEvent.type === 'onClick') {
+        element.onclick = targetEvent.event;
+      }
+    });
+  };
+
+  this.onStyle = (styles: styleObject) => {
+    for (const property in styles) {
+      if (styles.hasOwnProperty(property)) {
+        this.element.style[property] = styles[property];
+      }
     }
   };
 
