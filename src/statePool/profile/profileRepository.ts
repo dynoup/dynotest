@@ -11,15 +11,16 @@ function repository() {
   this.state = {};
   this.observers = [];
   this.emitter = new EventEmitter();
-  this.init = function () {
+  this.name = 'profile';
+  this.init = () => {
     this.state = getMyProfile();
   };
 
-  this.subscribe = function (subscriber: any) {
+  this.subscribe = (subscriber: any) => {
     this.observers.push(subscriber);
   };
-  this.notify = function () {
-    this.emitter.emit('profile');
+  this.notify = (name: string) => {
+    this.emitter.emit(name);
   };
   this.init();
 }
