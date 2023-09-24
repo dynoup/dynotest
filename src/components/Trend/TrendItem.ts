@@ -1,6 +1,5 @@
 import { ComponentProps } from '../../packages/core/component.type';
 import useCoreComponent from '../../packages/core/useCoreComponent';
-import { useContext } from '../../packages/store';
 
 export default function TrendItem(props?: ComponentProps) {
   const componentObject = useCoreComponent({
@@ -8,17 +7,15 @@ export default function TrendItem(props?: ComponentProps) {
     parent: props?.parent,
   });
 
-  const [getCount] = useContext('count', () => componentObject);
-
   componentObject.render = () => {
     return `
       <li class="trend-item">
         <a href="">
-          <p>Trending in South Korea</p>
-          <h3>광역버스</h3>
+          <p>Trending in ${props?.trend.country}South Korea</p>
+          <h3>${props?.trend.keyword}</h3>
           <dl>
             <dt>Number of posts</dt>
-            <dd>count: ${getCount()}</dd>
+            <dd>count: ${props?.trend.count}</dd>
           </dl>
         </a>
       </li>

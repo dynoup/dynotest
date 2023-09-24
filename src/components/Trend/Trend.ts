@@ -16,7 +16,7 @@ export default function Trend(props?: ComponentProps) {
       <aside class="trend">
         <h2 class="trend-title">Trends for you</h2>
 
-        <div class="trend-content>
+        <div class="trend-content">
           ${render(TrendListInstance)}
         </div>
       </aside>
