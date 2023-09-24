@@ -39,7 +39,7 @@ export default function App(props?: ComponentProps) {
       component: PostPageInstance1,
     },
     {
-      path: '/trend',
+      path: '/trends',
       component: TrendInstance,
     },
   ]);

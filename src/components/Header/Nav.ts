@@ -21,8 +21,8 @@ export default function Nav(props?: ComponentProps) {
   });
   const LinkInstance3 = Link({
     parent: componentObject,
-    to: '/trend',
-    content: 'Trend',
+    to: '/trends',
+    content: 'Trends',
   });
 
   componentObject.render = () => {
