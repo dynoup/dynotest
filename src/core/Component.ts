@@ -64,9 +64,10 @@ function Component($id: string, $parent: HTMLDivElement) {
     }
   };
 
-  this.onStateBind = (pool: any) => {
-    this.state = pool.state;
-    pool.emitter.on(pool.name, () => {
+  this.onStateBind = async (pool: any) => {
+    const newPool = await pool;
+    this.state = newPool.state;
+    newPool.emitter.on(pool.name, () => {
       this.render();
     });
   };

@@ -1,6 +1,6 @@
 export function createRoot() {
   const element = document.createElement('div');
-  element.id = '__App';
+  element.id = '__Root';
   document.body.appendChild(element);
   // 초기 css 값
   element.style.cssText = 'display: flex; width: 100vw; height: 100vh;';

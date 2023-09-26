@@ -1,12 +1,7 @@
 function Pool(repository: any) {
-  const StatePool = { profile: repository };
+  const StatePool = repository;
   this.StatePool = StatePool;
 
-  this.init = () => {
-    console.log('statePool!');
-  };
-
-  this.init();
   return this.StatePool;
 }
 
