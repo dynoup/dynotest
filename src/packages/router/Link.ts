@@ -17,11 +17,13 @@ export default function Link(props?: ComponentProps) {
 
   function handleClickLink(e: Event) {
     e.preventDefault();
-    navigate(props!.to); // a태그의 href로 전달해서 이벤트 중복 제거하기. (정규표현식 필요)
+    // navigate((e.target as HTMLAnchorElement).href);
+    navigate(props?.to); // TODO: a태그의 href로 전달해서 이벤트 중복 제거하기. (정규표현식 필요)
   }
 
   setEvents([
     {
+      // componentKey: 'Link',
       componentKey: componentObject.key,
       selector: '.route-link',
       action: 'click',
