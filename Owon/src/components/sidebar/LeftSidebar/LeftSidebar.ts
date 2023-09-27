@@ -19,8 +19,8 @@ const btnList: string[] = [
 
 export default function LeftSidebar($id: string, $parent: HTMLDivElement) {
   const controller = Owo($id, $parent);
+
   controller.onStyle({ width: '20vw' });
-  // LogoButton('__LeftSidebarBtn_Logo', controller.element, 'X');
   btnList.map((btn) => {
     NavButton(`__LeftSidebarBtn_${btn}`, controller.element, btn);
   });

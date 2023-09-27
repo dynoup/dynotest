@@ -11,6 +11,7 @@ export default function App($id: string, $parent: HTMLDivElement) {
     'overflow-x': 'hidden',
     'overflow-y': 'auto',
   });
+
   Router.setRoutes(controller.element, {
     '/profile': () => {
       ProfilePage('__ProfilePage', controller.element);

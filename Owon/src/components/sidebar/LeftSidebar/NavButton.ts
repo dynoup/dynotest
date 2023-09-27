@@ -12,6 +12,7 @@ export default function NavButton(
     width: '50%',
     margin: ' 8px',
   });
+
   controller.onClick(innerText, () => {
     if (innerText == 'Home') {
       history.pushState(null, '', '/');

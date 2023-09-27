@@ -21,7 +21,7 @@ function Component($id: string, $parent: HTMLDivElement) {
     this.element = document.getElementById($id);
   };
 
-  this.template = (newInnerHTML: any) => {
+  this.template = (newInnerHTML: string) => {
     this.innerHTML = newInnerHTML;
     this.element.innerHTML = `${newInnerHTML}`;
     // 템플릿 초기화

@@ -17,11 +17,13 @@ if (process.env.NODE_ENV === 'development') {
 
 // create root node
 const root = createRoot();
+
 export const statePool = StatePool({
   profile: profileRepository(),
   feed: feedRepository(),
   trend: trendRepository(),
 });
+
 export const Router = OwoRouter();
 
 LeftSidebar('__LeftSiderbar', root);

@@ -8,6 +8,7 @@ export default async function ProfilePage(
 ) {
   const controller = Owo($id, $parent);
   await controller.onStateBind(statePool.profile);
+  console.log('profilepage!!');
   controller.template(
     `<button id="backspaceBtn" type="button">&lt;</button><div style="display: flex;"><img src=${controller.state.pfpUrl} alt="ProfileImage" style="width: 100px; height:100px; border-radius: 50%; object-fit: cover;" loading="lazy"/><div>userName: <div>${controller.state.userName}</div> <br> userId: ${controller.state.userId} <br> following: <h4>following: ${controller.state.following}</h4><h4 >follower: ${controller.state.follower}<//></section>`
   );

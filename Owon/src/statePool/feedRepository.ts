@@ -15,6 +15,7 @@ async function getFeeds() {
 
 export default async function feedRepository() {
   const repository = Owository('feed');
+
   try {
     const data = await getFeeds();
     repository.state = data;

@@ -15,6 +15,7 @@ type Feed = {
 export default async function FeedList($id: string, $parent: HTMLDivElement) {
   const controller = Owo($id, $parent);
   await controller.onStateBind(statePool.feed);
+
   controller.template(`<div>feedlist</div>`);
   controller.state.forEach((content: Feed) => {
     FeedCard(`__FeedCard_${content.postId}`, controller.element, content);
